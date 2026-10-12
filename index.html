@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jardinería y Mantenimiento Integral | Armijos</title>
+    <!-- Enlaces a tus archivos locales de la carpeta css -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        /* 🌳 Ajustes visuales basados en tu mockup corporativo */
+        body { background-color: #f4f6f4; font-family: 'Segoe UI', Tahoma, Geneva, sans-serif; margin: 0; padding: 0; }
+        
+        /* Barra de Alertas Naranja superior */
+        .marquee-alert-bar { background: linear-gradient(90deg, #FF9800 0%, #E65100 100%); color: white; font-weight: 700; font-size: 13.5px; padding: 10px 20px; text-align: center; border-bottom: 2px solid #cc4100; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        /* NUEVOS ESTILOS CABECERA: Logo Izquierda, Título Central y Menú Limpio Derecha */
+        .header-logo-area { background-color: #ffffff; padding: 10px 0; border-bottom: 1px solid #eaeaea; }
+        .nav-container-armijos { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        
+        /* Enlaces del menú exclusivos de la derecha */
+        .nav-menu-links-derecha a { color: #0A2F1D; text-decoration: none; font-weight: 700; font-size: 16px; transition: color 0.2s; }
+        .nav-menu-links-derecha a:hover { color: #2E7D32; }
+
+        /* Estilos locales para el Hero Carousel de fotos transicionales */
+        .armijos-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; }
+        .armijos-slide.active { opacity: 1; }
+        
+        /* Cuadrícula de 5 Columnas de Servicios */
+        .mockup-services-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 40px; }
+        @media (max-width: 992px) { .mockup-services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 576px) { .mockup-services-grid { grid-template-columns: 1fr; } }
+        
+        /* Tarjetas Verdes Limpias */
+        .mockup-card { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 12px; padding: 25px 15px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+        .mockup-card:hover { transform: translateY(-4px); background-color: #ffffff; border-color: #0A2F1D; box-shadow: 0 8px 20px rgba(10,47,29,0.1); }
+        .mockup-card svg { width: 55px; height: 55px; margin-bottom: 15px; fill: #0A2F1D; }
+        .mockup-card h3 { color: #0A2F1D; font-size: 17.5px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; text-transform: uppercase; letter-spacing: -0.3px; }
+        .mockup-card p { color: #435b47; font-size: 13px; font-weight: 600; margin: 0; line-height: 1.3; }
+
+        /* Estilos fijos para evitar que los Shorts verticales se hagan gigantes hacia abajo */
+        .reel-box-armijos {
+            flex: 0 0 320px;
+            width: 320px;
+            background-color: #000; 
+            border-radius: 14px; 
+            overflow: hidden; 
+            position: relative; 
+            aspect-ratio: 16/10; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15); 
+            border: 2px solid #fff;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .reel-box-armijos:hover {
+            transform: scale(1.04) translateY(-5px);
+            box-shadow: 0 12px 25px rgba(10,47,29,0.3);
+            border-color: #2E7D32;
+            cursor: pointer;
+        }
+        .reel-text-overlay {
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            background: linear-gradient(transparent, rgba(0,0,0,0.95)); 
+            padding: 12px 10px; 
+            color: white; 
+            pointer-events: none;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Pie de Página Público */
+        .footer-publico-armijos { background-color: #0A2F1D; color: white; padding: 22px 0; font-size: 14px; font-weight: 600; border-top: 4px solid #2E7D32; }
+        .footer-flex-info { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .whatsapp-fixed-badge { background-color: #25D366; color: white; padding: 6px 14px; border-radius: 50px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .whatsapp-fixed-badge:hover { color: white; background-color: #1ebd58; }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor General de la Vista Pública -->
+    <div id="pantalla-publica-vecinos">
+        
+        <!-- Barra de Avisos Dinámica del Mockup -->
+        <div class="marquee-alert-bar">
+            <span id="texto-marquesina-dinamica">📋 TABLÓN DE AVISOS / ALERTAS - COMUNIDAD VALDERRIBAS 96: Cierre de Pista de Tenis este miércoles (8:00 - 14:00) por mantenimiento. ⚠️</span>
+        </div>
+
+        <!-- Cabecera Logo Izquierda, Texto Central y Menú Exclusivo -->
+        <div class="header-logo-area">
+            <div class="container nav-container-armijos">
+                
+                <!-- 1. Logo Solo a la Izquierda -->
+                <div style="display: flex; align-items: center;">
+                    <img src="logo_solo.jpeg" alt="ARMIJOS LOGO" style="height: 65px; object-fit: contain;" onerror="this.src='LOGO_Transparente.png'">
+                </div>
+
+                <!-- 2. Texto Resaltado en el Espacio en Blanco -->
+                <div style="flex-grow: 1; text-align: center; padding: 0 20px;">
+                    <h2 style="color: #0A2F1D; font-family: 'Arial Black', sans-serif; font-weight: 900; font-size: 26px; margin: 0; letter-spacing: 2px; text-transform: uppercase;">
+                        Jardinería y Mantenimiento
+                    </h2>
+                </div>
+
+                <!-- 3. Menú Exclusivo a la Derecha -->
+                <div class="nav-menu-links-derecha" style="display: flex; align-items: center; gap: 25px;">
+                    <a href="#contacto">Contacto</a>
+                    <a onclick="solicitarAccesoAdmin()" style="cursor: pointer; background-color: #0A2F1D; color: white; padding: 8px 16px; border-radius: 4px; font-weight: bold; font-size: 14px; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">🔒 Acceso Admin</a>
+                </div>
+
+            </div>
+        </div>
+        <!-- ==========================================================
+             HERO SLIDER PREMIUM 420PX - 55 IMÁGENES REALES ARMIJOS
+             ========================================================== -->
+        <div id="inicio" style="width: 100%; height: 420px; position: relative; overflow: hidden; margin-bottom: 40px; background-color: #0A2F1D;">
+            
+            <!-- Bloque Completo de las 55 Diapositivas con Encuadres Optimizados -->
+            <div class="armijos-slide active"><img src="galeria_servicios/1.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 80%;" onerror="this.src='TARJEETA.jpeg'"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/2.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/3.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/4.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/5.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/6.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/7.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 80%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/8.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/9.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/10.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/11.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/12.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/13.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 80%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/14.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/15.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/16.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/17.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/18.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/19.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/20.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 80%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/21.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/22.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/23.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/24.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/25.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/26.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/27.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/28.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/29.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/30.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/31.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/32.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/33.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/34.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/35.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/36.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/37.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/38.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/39.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/40.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 80%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/41.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/42.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/43.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/44.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/45.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/46.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/47.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/48.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/49.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/50.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 80%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/51.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/52.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center center;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/53.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/54.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center 75%;"></div>
+            <div class="armijos-slide"><img src="galeria_servicios/55.jpeg" style="width:100%; height:420px; object-fit:cover; object-position: center bottom;"></div>
+
+            <!-- Capa oscura de contraste estético (Mejora la lectura del texto blanco) -->
+            <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(transparent, rgba(0,0,0,0.75)); pointer-events: none;"></div>
+            
+Tu Oasis, Siempre Perfecto.
+🌿 Especialistas en Conservación y Paisajismo de Comunidades            <!-- MENSAJE CORPORATIVO FIJADO EN EL BORDE INFERIOR SEGURO -->
+            <div style="position: absolute; bottom: 45px; left: 5%; color: white; text-shadow: 2px 2px 14px rgba(0,0,0,0.95); z-index: 10; max-width: 85%;">
+                <h1 style="font-size: 44px; font-weight: 900; font-family: 'Arial Black', sans-serif; margin: 0; letter-spacing: -1px; line-height: 1.1;">Tu Oasis, Siempre Perfecto.</h1>
+                <p style="font-size: 18px; font-weight: 600; color: #E8F5E9; margin-top: 8px; margin-left: 3px; margin-bottom: 0;">🌿 Especialistas en Conservación y Paisajismo de Comunidades</p>
+            </div>
+        </div>
+
+        <!-- Contenedor General: Servicios Profesionales Explicativos Reales Armijos -->
+        <div class="container my-5" id="servicios">
+            <h2 class="text-center fw-bold mb-4" style="color: #0A2F1D; font-family: 'Arial Black', sans-serif; letter-spacing: -0.5px;">Nuestros Servicios Especializados</h2>
+            
+            <div class="mockup-services-grid mb-5">
+                
+                <!-- 1. JARDINES Y CORTES -->
+                <div class="mockup-card" style="display: flex; flex-direction: column; justify-content: start; text-align: center; padding: 20px 15px; height: 100%;">
+                    <div style="font-size: 42px; margin-bottom: 12px; line-height: 1;">🏡</div>
+                    <div>
+                        <h3>Mantenimiento</h3>
+                        <p style="margin-top: 8px; font-size: 13px; line-height: 1.4;">Cuidado periódico y puesta a punto de jardines comunitarios y privados. Segado preciso de césped, recorte estético de setos y perfilado con maquinaria profesional manual (cortacéspedes y cortasetos).</p>
+                    </div>
+                </div>
+
+                <!-- 2. CONTROL Y FUMIGACIÓN -->
+                <div class="mockup-card" style="display: flex; flex-direction: column; justify-content: start; text-align: center; padding: 20px 15px; height: 100%;">
+                    <div style="font-size: 42px; margin-bottom: 12px; line-height: 1;">🐛</div>
+                    <div>
+                        <h3>Fumigación</h3>
+                        <p style="margin-top: 8px; font-size: 13px; line-height: 1.4;">Tratamientos fitosanitarios aplicados de forma segura con carné oficial homologado. Control efectivo de plagas en plantas, árboles y praderas para mantener la salud vegetal de la comunidad.</p>
+                    </div>
+                </div>
+
+                <!-- 3. LIMPIEZA Y SOPLADO -->
+                <div class="mockup-card" style="display: flex; flex-direction: column; justify-content: start; text-align: center; padding: 20px 15px; height: 100%;">
+                    <div style="font-size: 42px; margin-bottom: 12px; line-height: 1;">🍂</div>
+                    <div>
+                        <h3>Limpieza</h3>
+                        <p style="margin-top: 8px; font-size: 13px; line-height: 1.4;">Desbroce manual de parcelas y retirada minuciosa de maleza. Soplado y recogida eficaz de hojas secas y restos de cortes en caminos, accesos y zonas comunes para un acabado siempre limpio.</p>
+                    </div>
+                </div>
+
+                <!-- 4. PREPARACIÓN Y SIEMBRA -->
+                <div class="mockup-card" style="display: flex; flex-direction: column; justify-content: start; text-align: center; padding: 20px 15px; height: 100%;">
+                    <div style="font-size: 42px; margin-bottom: 12px; line-height: 1;">🌱</div>
+                    <div>
+                        <h3>Siembra y Tepes</h3>
+                        <p style="margin-top: 8px; font-size: 13px; line-height: 1.4;">Preparación artesanal y acondicionamiento manual del terreno. Plantación, resembrado de zonas despobladas e instalación cuidadosa de césped natural en rollos (tepes) de máxima calidad.</p>
+                    </div>
+                </div>
+
+                <!-- 5. REPARACIÓN DE RIEGOS -->
+                <div class="mockup-card" style="display: flex; flex-direction: column; justify-content: start; text-align: center; padding: 20px 15px; height: 100%;">
+                    <div style="font-size: 42px; margin-bottom: 12px; line-height: 1;">💦</div>
+                    <div>
+                        <h3>Sistemas Riego</h3>
+                        <p style="margin-top: 8px; font-size: 13px; line-height: 1.4;">Revisión, ajuste y montaje de tuberías, difusores y goteos. Programación inteligente de centralitas de riego manuales para optimizar el consumo de agua y garantizar la humedad ideal.</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <!-- Bloque de Videos Cortos Reenganchados en Acción -->
+            <h3 class="fw-bold mb-4" style="color: #0A2F1D; font-size: 22px; border-left: 4px solid #2E7D32; padding-left: 10px;">⚡ Trabajos en Acción</h3>
+            
+            <div style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;">
+                
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v1.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #2E7D32; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Mantenimiento</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Perfilado técnico de setos altos 🌿</p>
+                    </div>
+                </div>
+
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v2.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #198754; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Preparación</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Limpieza de tierra para tepes 🚜</p>
+                    </div>
+                </div>
+
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v3.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #E65100; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Renovación</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Adecuación de áreas comunes 🛠️</p>
+                    </div>
+                </div>
+
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v4.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #0d6efd; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Control</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Acondicionamiento forestal completo 🌲</p>
+                    </div>
+                </div>
+
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v5.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #7B1FA2; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Podas</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Perfilado estético de coníferas 🌲</p>
+                    </div>
+                </div>
+
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v6.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #20c997; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Zonas Verdes</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Mantenimiento estival de fincas 🌿</p>
+                    </div>
+                </div>
+
+                <div class="reel-box-armijos">
+                    <video src="galeria_servicios/videos_cortos/v7.mp4" autoplay loop muted playsinline style="width:100%; height:100%; object-fit: cover;"></video>
+                    <div class="reel-text-overlay">
+                        <span style="background-color: #343a40; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-transform: uppercase;">Cercados</span>
+                        <p style="margin: 4px 0 0 0; font-size: 11.5px; font-weight: 700; line-height: 1.2;">Alineación de setos perimetrales 📏</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+         <!-- Pie de Página de la Cara Pública con WhatsApp 100% Funcional -->
+        <footer class="footer-publico-armijos" id="contacto">
+            <div class="container footer-flex-info" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <div>📞 Phone: 680 442 376</div>
+                <div>📧 Email: enrique-77@hotmail.es</div>
+                <div>
+                    <!-- Enlace oficial directo al chat de Enrique con mensaje predefinido -->
+                    <a href="https://wa.me/680442376" 
+                       target="_blank" 
+                       class="whatsapp-fixed-badge" 
+                       style="transition: background-color 0.2s; border: 1px solid #fff; text-decoration: none; padding: 6px 14px; background-color: #25D366; color: white; border-radius: 50px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                        <span>WhatsApp</span> 📲
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- SCRIPTS DE CONTROL JAVASCRIPT EXCLUSIVOS -->
+    <script>
+        // 1. Lector automático del tablón de anuncios dinámico
+        document.addEventListener("DOMContentLoaded", () => {
+            const marquesinaTexto = document.getElementById("texto-marquesina-dinamica");
+            const avisoGuardado = localStorage.getItem("aviso_armijos_guardado");
+            if (avisoGuardado && marquesinaTexto) {
+                marquesinaTexto.innerHTML = "📢 " + avisoGuardado;
+            }
+        });
+
+        // 2. Motor de transiciones fluidas de alta velocidad para las 55 diapositivas
+        document.addEventListener("DOMContentLoaded", () => {
+            const slides = document.querySelectorAll('.armijos-slide');
+            let currentSlide = 0;
+            if(slides.length > 1) {
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 3000); // Rotación cada 3 segundos
+            }
+        });
+
+        // 3. Sistema interactivo seguro de clave administrativa
+        function solicitarAccesoAdmin() {
+            const entradaClave = prompt("Introduce tu clave de Administrador Armijos:");
+            if (entradaClave === "armijos2026") {
+                window.location.href = "admin.html";
+            } else if (entradaClave !== null) {
+                alert("Acceso denegado. Clave incorrecta.");
+            }
+        }
+    </script>
+</body>
+</html>

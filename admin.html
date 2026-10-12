@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración | Armijos</title>
+    
+    <style>
+        :root {
+            --verde-oscuro: #0A2F1D;
+            --verde-claro: #198754;
+            --blanco: #ffffff;
+            --gris-fondo: #f4f6f4;
+            --gris-texto: #2c3e2f;
+            --sombra: 0 4px 12px rgba(10, 47, 29, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--gris-fondo); color: var(--gris-texto); padding: 30px 0; }
+        .container { width: 95%; max-width: 1200px; margin: 0 auto; }
+        
+        .admin-header { background-color: var(--verde-oscuro); color: var(--blanco); padding: 20px; border-radius: 8px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--sombra); }
+        .admin-header h1 { font-size: 1.8rem; font-weight: 800; }
+        .admin-header span { font-size: 0.95rem; opacity: 0.8; }
+
+        .admin-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        @media (min-width: 992px) { .admin-grid { grid-template-columns: 3fr 2fr; } }
+
+        .panel-card { background-color: var(--blanco); border-radius: 8px; padding: 25px; box-shadow: var(--sombra); border: 1px solid rgba(10, 47, 29, 0.05); }
+        .panel-card h3 { color: var(--verde-oscuro); margin-bottom: 20px; border-bottom: 2px solid var(--gris-fondo); padding-bottom: 10px; font-weight: 700; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 10px; border: 1px solid #cccccc; border-radius: 4px; font-family: inherit; font-size: 0.95rem; }
+        .form-control:focus { outline: none; border-color: var(--verde-claro); }
+        
+        .row-inputs { display: grid; grid-template-columns: 3fr 1fr; gap: 15px; }
+        .mb-2 { margin-bottom: 0.5rem!important; }
+        .mb-3 { margin-bottom: 1rem!important; }
+
+        .btn-admin { width: 100%; padding: 12px; border: none; border-radius: 4px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: background 0.2s; margin-top: 10px; }
+        .btn-primary { background-color: var(--verde-claro); color: var(--blanco); }
+        .btn-primary:hover { background-color: #146c43; }
+        .btn-secondary { background-color: #6c757d; color: var(--blanco); }
+        .btn-secondary:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+<header class="admin-header">
+    <div>
+        <h1>ARMIJOS</h1>
+        <span>Sistema de Gestión Automatizado — Perfil Administrador</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <div><strong>Sesión Activa:</strong> enrique-77@hotmail.es</div>
+        <!-- Botón directo para volver a la web de vecinos sin usar la flecha atrás -->
+        <a href="index.html" style="text-decoration: none; background-color: #0A2F1D; color: white; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 13.5px; border: 1px solid #0A2F1D; transition: background 0.2s;">🌐 Ver Web Clientes</a>
+    </div>
+</header>
+
+
+        <div class="admin-grid">
+            <!-- COLUMNA GENERADORA -->
+            <section class="panel-card">
+                <h3>Generador de Facturas y Presupuestos</h3>
+                <form id="form-documento">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                        <div class="form-group">
+                            <label for="tipo-doc">Tipo de Documento</label>
+                            <select id="tipo-doc" class="form-control">
+                                <option value="factura">Factura Oficial</option>
+                                <option value="presupuesto">Presupuesto (Sin IVA)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="num-doc">Número Correlativo</label>
+                            <input type="number" id="num-doc" class="form-control" value="41">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seleccionar-cliente">Seleccionar Cliente Guardado</label>
+                        <select id="seleccionar-cliente" class="form-control">
+                            <option value="">-- Selecciona un cliente recurrente o nuevo --</option>
+                            <option value="1">ABBEY S.A (Factura 37)</option>
+                            <option value="2">SERVICIOS INTEGRALES RUGE S.L (Factura 38)</option>
+                            <option value="3">ANDRES CAMINERO TAPIADOR (Factura 39)</option>
+                            <option value="4">COMUNIDAD ANGELILLO Nº 1 (Factura 40)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cliente-nombre">Nombre / Razón Social</label>
+                        <input type="text" id="cliente-nombre" class="form-control" placeholder="Escribe el nombre del cliente">
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                        <div class="form-group">
+                            <label for="cliente-nif">NIF / CIF</label>
+                            <input type="text" id="cliente-nif" class="form-control" placeholder="Identificación fiscal">
+                        </div>
+                        <div class="form-group">
+                            <label for="doc-fecha">Fecha de Emisión</label>
+                            <input type="date" id="doc-fecha" class="form-control">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cliente-dir">Dirección Fiscal / Finca</label>
+                        <input type="text" id="cliente-dir" class="form-control" placeholder="Dirección completa">
+                    </div>
+
+                    <!-- CONTENEDOR DINÁMICO DE FILAS CON BOTONES + Y 🗑 -->
+                    <div id="contenedor-dinamico-conceptos"></div>
+
+                    <!-- SELECTOR DE FORMA DE PAGO INTERACTIVO -->
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px; margin-bottom:20px; border-top:1px solid #eee; padding-top:15px;">
+                        <div class="form-group">
+                            <label for="forma-pago-select">Forma de Pago</label>
+                            <select id="forma-pago-select" class="form-control" onchange="evaluarMetodoPago()">
+                                <option value="Transferencia">Transferencia Bancaria</option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="bloque-cuenta-bancaria">
+                            <label for="cuenta-iban">Número de Cuenta / IBAN</label>
+                            <input type="text" id="cuenta-iban" class="form-control" value="ESXX XXXX XXXX XXXX XXXX XXXX">
+                        </div>
+                    </div>
+
+                    <!-- EL BOTÓN VERDE DISPARADOR DE PDF -->
+                    <button type="button" class="btn-admin btn-primary" onclick="generarDocumentoPDF()">📥 Generar y Descargar PDF</button>
+                </form>
+
+            </section>
+
+            <!-- CAJA DE DESCARGAS CORPORATIVAS CON FACTURAS INTACTAS -->
+            <section class="panel-card" style="margin-top: 25px; background-color: #ffffff; border: 1px solid rgba(10, 47, 29, 0.1); border-radius: 8px; padding: 25px; box-shadow: 0 4px 12px rgba(10,47,29,0.05);">
+                <h3 style="color: #0A2F1D; margin-bottom: 15px; font-size: 1.2rem; font-weight: 700; border-bottom: 2px solid #f4f6f4; padding-bottom: 8px;">📁 Material Corporativo Disponible</h3>
+                <p style="color: #666; font-size: 0.85rem; margin-bottom: 20px;">Haz clic para descargar tus archivos originales directamente en tu PC o teléfono móvil:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <!-- Botón Descarga Logo -->
+                    <a href="logo_solo.jpeg" download="Logo_Solo_Armijos.jpeg" style="display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #E8F5E9; color: #0A2F1D; border: 1px solid #C8E6C9; padding: 12px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">
+                        📥 Descargar Logo Solo
+                    </a>
+                    
+                    <!-- Botón Descarga Tarjeta JPG -->
+                    <a href="TARJEETA.jpeg" download="Tarjeta_Presentacion_Armijos.jpeg" style="display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #E8F5E9; color: #0A2F1D; border: 1px solid #C8E6C9; padding: 12px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">
+                        📥 Descargar Tarjeta Digital (JPG)
+                    </a>
+
+                    <!-- NUEVO: Botón Descarga PDF Imprimible A3 -->
+                    <a href="Plantilla_Impresion_A3_Tarjetas.pdf" download="Plantilla_Impresion_A3_Tarjetas.pdf" style="display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #0A2F1D; color: white; border: 1px solid #0A2F1D; padding: 12px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; transition: all 0.2s;">
+                        🖨️ Descargar Pliego A3 listo para Imprimir (20 Tarjetas)
+                    </a>
+                </div>
+            </section>
+
+
+            </section>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+	    <script>
+        function evaluarMetodoPago() {
+            const metodo = document.getElementById("forma-pago-select").value;
+            const bloqueCuenta = document.getElementById("bloque-cuenta-bancaria");
+            if(metodo === "Transferencia") {
+                bloqueCuenta.style.display = "block";
+            } else {
+                bloqueCuenta.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>

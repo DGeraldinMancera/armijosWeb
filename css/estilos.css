@@ -1,0 +1,35 @@
+/* ==========================================
+   VARIABLES GLOBALES (Colores y Tipografía)
+   ========================================== */
+:root {
+    --verde-oscuro: #0A2F1D;     /* Tu color corporativo principal */
+    --verde-claro: #2E7D32;      /* Segundo tono de verde para el logo/detalles */
+    --blanco-puro: #FFFFFF;      /* Fondos limpios */
+    --gris-fondo: #F4F6F4;       /* Fondo sutil para bloques */
+    --gris-oscuro: #2C3E2F;      /* Para textos, garantizando alta legibilidad */
+    --alerta-color: #E65100;     /* Naranja corporativo para notas de portería urgentes */
+    --fuente-principal: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía recta moderna */
+}
+
+/* ==========================================
+   ESTILOS BASE / RESET
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    color: var(--gris-oscuro);
+    background-color: var(--blanco-puro);
+    line-height: 1.6;
+}
+
+/* Contenedor estándar para que todo esté alineado */
+.contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
